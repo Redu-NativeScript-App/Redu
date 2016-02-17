@@ -19,5 +19,5 @@ Example application flow:
 - Teachers can award students.
 - Students can see all tasks.
 - Students can gather points and rewards.
-- Students have
+- Students have the ability to 'use' their rewards.
 - Leaderboard for all students.
