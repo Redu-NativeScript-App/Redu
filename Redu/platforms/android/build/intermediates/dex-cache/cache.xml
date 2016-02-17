@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\The_Mask\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="D:\TNSProjects\Redu\Redu\platforms\android\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-8fa1f288aa170045a8278548392b6bcd9516ac98.jar" />
+    </item>
+    <item
+        jar="D:\TNSProjects\Redu\Redu\platforms\android\libs\nativescript.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="458b09f8d542b506b379ce6f410170c5f1688fc4">
+        <dex dex="D:\TNSProjects\Redu\Redu\platforms\android\build\intermediates\pre-dexed\debug\nativescript-dfba31261c9476c7071269672b28d6df77a3577b.jar" />
+    </item>
+
+</items>
