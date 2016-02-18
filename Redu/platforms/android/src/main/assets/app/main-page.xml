@@ -1,7 +1,13 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
+
     <Label text="Username" class="title"/>
-    <Button text="Fuck yez" tap="{{ tapAction }}" />
+    <TextView id="login-username" />
+
+    <Label text="Password" class="title"/>
+    <TextView id="login-password" />
+
+    <Button text="Login" tap="{{ tapAction }}" />
     <Label text="{{ message }}" class="message" textWrap="true"/>
   </StackLayout>
 </Page>
