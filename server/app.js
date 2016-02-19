@@ -24,6 +24,6 @@ app.use(function(err, req, res, next) {
   }
 });
 
-let port = 3001;
+let port = process.env.PORT || 3001;
 app.listen(port, () =>
   console.log(`Server running at localhost:${port}`));
