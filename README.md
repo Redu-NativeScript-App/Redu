@@ -1,23 +1,21 @@
-# Redu
+# NativeScript Project Description
 
-The application we are going to present will be called Redu.
-The idea behind it is to improve the current school education system through gamification.
-The application is for both teachers and students.
-Teachers can assign tasks to students and list rewards for completing them.
-Completing a tasks earns the student points.
-The more points the student has, the higher they are in the leaderboard.
+## The project
 
-Example application flow:
-- Teacher creates a task that requires students to solve all math problems until page 51.
-- The reward is whoever does it has 1 time permission to skip class whenever they want.
-- The task gives 150 points.
-- A students decides completes the task.
-- The teacher confirms the task is finished and the student gets the reward + points.
+For the NativeScript assignment we will be developing a game called **Redu**.
+The gameplay will consist of different colored blocks falling down.
+The game has one main color that changes over time.
+Depending on that color, the player must click on the correspondingly colored falling blocks.
+For example if the main color is red, the player must click on all red falling blocks until the main color changes.
+Upon tapping the block, the player gets points and destroys the block.
+Some falling blocks are special and require different gestures to be destroyed.
+Points vary depending on how difficult it is for a block to be destroyed.
+When a user beats his record, they can share it globally.
 
-# Points of functionality
-- Teachers can add assignments.
-- Teachers can award students.
-- Students can see all tasks.
-- Students can gather points and rewards.
-- Students have the ability to 'use' their rewards.
-- Leaderboard for all students.
+## Points of functionality
+
+- Randomly generated falling blocks.
+- Randomly picked main color.
+- Highscore system (local and global)
+- Get location of the player who beat his record.
+- Different modes.
