@@ -2,7 +2,7 @@
 	"nativescript": {
 		"id": "org.nativescript.Redu",
 		"tns-android": {
-			"version": "1.6.0"
+			"version": "1.6.1"
 		}
 	},
 	"dependencies": {
