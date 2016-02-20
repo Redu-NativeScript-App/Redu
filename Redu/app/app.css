@@ -28,3 +28,11 @@ button {
     color: #284848;
     horizontal-align: center;
 }
+
+.settins-labels {
+  font-size: 25;
+  color: yellow;
+  font-family: GretoonHighlight;
+  padding-left: 15;
+  width: 230;
+}

@@ -1,5 +1,5 @@
 var vmModule = require("../view-models/main-view-model");
-var frame = require('ui/frame');
+var frame = require("ui/frame");
 var topmost;
 
 function pageLoaded(args) {
