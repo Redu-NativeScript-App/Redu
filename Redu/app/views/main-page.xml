@@ -2,8 +2,7 @@
   <StackLayout>
     <Label text="Main Menu" class="title"/>
     <Button text="START" tap="onStartBtnTapped" id="startBtn" />
-    <Button text="Leaderboard" tap="onLeaderboardBtnTapped" id="leaderboardBtn" />
+    <Button text="LEADERBOARD" tap="onLeaderboardBtnTapped" id="leaderboardBtn" />
     <Button text="SETTINGS" tap="onSettingsBtnTapped" id="settingsBtn" />
-
   </StackLayout>
 </Page>
