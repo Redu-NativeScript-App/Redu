@@ -1,16 +1,44 @@
-﻿.title {
-    font-size: 30;
-    horizontal-align: center;
-    margin: 20;
+page{
+  background-color: #FF5400;
 }
 
+/*This way the ActionBar is invisible*/
+/*ActionBar {
+  background-color: #FF5400;
+  color: #FF5400;
+}*/
+
 button {
-    font-size: 42;
+    font-size: 30;
+    font-family: GretoonHighlight;
+    color: white;
     horizontal-align: center;
+    background-image: url("~/images/green-rect-btn-unpressed.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 350;
+    height: 100;
+
+}
+
+.title {
+    font-size: 45;
+    font-family: Gretoon;
+    color: white;
+    horizontal-align: center;
+    margin: 20;
 }
 
 .message {
     font-size: 20;
     color: #284848;
     horizontal-align: center;
+}
+
+.settins-labels {
+  font-size: 25;
+  color: yellow;
+  font-family: GretoonHighlight;
+  padding-left: 15;
+  width: 230;
 }

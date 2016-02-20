@@ -1,3 +1,13 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
+  <StackLayout>
+    <Label text="Settings" class="title"/>
+      <StackLayout orientation="horizontal">
+        <Label text="Sounds" class="settins-labels" />
+        <Switch checked="true" />
+     </StackLayout>
+     <StackLayout orientation="horizontal">
+       <Label text="Music" class="settins-labels" />
+       <Switch checked="true" />
+    </StackLayout>
+  </StackLayout>
 </Page>

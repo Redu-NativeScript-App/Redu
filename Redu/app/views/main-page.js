@@ -1,50 +1,46 @@
 var vmModule = require("../view-models/main-view-model");
+var view = require("ui/core/view");
 var frame = require("ui/frame");
-var buttonModule = require("ui/label");
-var layout = require("ui/layouts/grid-layout");
-var colorModule = require("color");
-var globals = require("../globals").globals;
-var helpers = require("../helpers").helpers;
-var platformModule = require("platform");
-
-var screenWidth;
-var screenHeight;
-
+var topmost;
+var startBtn;
+var leaderboardBtn;
+var settingsBtn;
+var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
+var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = vmModule.mainViewModel;
-    screenWidth = platformModule.screen.mainScreen.widthPixels;
-    screenHeight = platformModule.screen.mainScreen.heightPixels;
-    var grid = page.getViewById("grid");
-    if (grid) {
-      populateGrid(grid, 4, 5);
-      console.log(grid.getChildAt(4).text);
-    }
+    topmost = frame.topmost();
+    startBtn = view.getViewById(page, "startBtn");
+    leaderboardBtn = view.getViewById(page, "leaderboardBtn");
+    settingsBtn = view.getViewById(page, "settingsBtn");
+    changeButtonStateIfPressed(startBtn);
+    changeButtonStateIfPressed(leaderboardBtn);
+    changeButtonStateIfPressed(settingsBtn);
 }
 
-function populateGrid(grid, numberOfColumns, numberOfRows) {
-  var rowHeight = Math.ceil(screenHeight / numberOfRows);
-  var i;
-  for (i = 0; i < numberOfColumns; i++) {
-    grid.addColumn(new layout.ItemSpec(1, layout.GridUnitType.star));
-  }
+function onStartBtnTapped() {
+  startBtn.style.backgroundImage = btnPressed;
+  topmost.navigate("./views/game-page");
+}
 
-  for (i = 0; i < numberOfRows; i++) {
-    grid.addRow(new layout.ItemSpec(1, layout.GridUnitType.star));
-    for (var j = 0; j < numberOfColumns; j++) {
-        var element = new buttonModule.Label();
-        element.style.backgroundColor = helpers.getRandomElement(globals.colors);
-        element.style.height = rowHeight;
-        element.text = i + " " + j;
-        element.tap = gridTapped;
-        layout.GridLayout.setColumn(element, j);
-        layout.GridLayout.setRow(element, i);
-        grid.addChild(element);
-    }
-  }
+function onLeaderboardBtnTapped() {
+  leaderboardBtn.style.backgroundImage = btnPressed;
+  topmost.navigate("./views/global-leaderboard-page");
+}
 
-  function gridTapped(args) {
+function onSettingsBtnTapped() {
+  settingsBtn.style.backgroundImage = btnPressed;
+  topmost.navigate("./views/settings-page");
+}
+
+function changeButtonStateIfPressed(button) {
+  if (button.style.backgroundImage === btnPressed) {
+    button.style.backgroundImage = btnUnpressed;
   }
 }
 
 exports.pageLoaded = pageLoaded;
+exports.onStartBtnTapped = onStartBtnTapped;
+exports.onLeaderboardBtnTapped = onLeaderboardBtnTapped;
+exports.onSettingsBtnTapped = onSettingsBtnTapped;

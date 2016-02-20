@@ -1,3 +1,8 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">.
-  <GridLayout id="grid"></GridLayout>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
+  <StackLayout>
+    <Label text="Main Menu" class="title"/>
+    <Button text="START" tap="onStartBtnTapped" id="startBtn" />
+    <Button text="LEADERBOARD" tap="onLeaderboardBtnTapped" id="leaderboardBtn" />
+    <Button text="SETTINGS" tap="onSettingsBtnTapped" id="settingsBtn" />
+  </StackLayout>
 </Page>
