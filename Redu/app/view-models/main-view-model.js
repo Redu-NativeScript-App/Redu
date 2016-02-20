@@ -1,22 +1,12 @@
 var observable = require("data/observable");
-var HelloWorldModel = (function (_super) {
-    __extends(HelloWorldModel, _super);
-    function HelloWorldModel() {
+var MainModel = (function (_super) {
+    __extends(MainModel, _super);
+    function MainModel() {
         _super.call(this);
-        this.counter = 42;
-        this.set("message", this.counter + " taps left");
     }
-    HelloWorldModel.prototype.tapAction = function () {
-        this.counter--;
-        if (this.counter <= 0) {
-            this.set("message", "Hoorraaay! You unlocked the NativeScript clicker achievement!");
-        }
-        else {
-            this.set("message", this.counter + " taps left");
-        }
-    };
-    return HelloWorldModel;
+
+    return MainModel;
 })(observable.Observable);
 
-exports.HelloWorldModel = HelloWorldModel;
-exports.mainViewModel = new HelloWorldModel();
+exports.MainModel = MainModel;
+exports.mainViewModel = new MainModel();
