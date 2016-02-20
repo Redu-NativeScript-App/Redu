@@ -1,7 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <StackLayout>
-    <Label text="Tap the button" class="title"/>
-    <Button text="TAP" />
-    <Label text="{{ message }}" class="message" textWrap="true"/>
+    <Label text="Main Menu" class="title"/>
+    <Button text="START" tap="onStartBtnTapped" id="startBtn" />
+    <Button text="Leaderboard" tap="onLeaderboardBtnTapped" id="leaderboardBtn" />
+    <Button text="SETTINGS" tap="onSettingsBtnTapped" id="settingsBtn" />
+
   </StackLayout>
 </Page>

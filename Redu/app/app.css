@@ -1,12 +1,21 @@
-﻿.title {
-    font-size: 30;
-    horizontal-align: center;
-    margin: 20;
+page{
+  background-color: #FF5400;
 }
 
 button {
     font-size: 42;
     horizontal-align: center;
+    background-image: url("~/images/green-rect-btn-unpressed.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 350;
+    height: 100;
+}
+
+.title {
+    font-size: 30;
+    horizontal-align: center;
+    margin: 20;
 }
 
 .message {
