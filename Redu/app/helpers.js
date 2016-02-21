@@ -23,5 +23,11 @@ exports.helpers = {
     setTimeout(function() {
         button.style.backgroundImage = btnUnpressed;
     }, 200);
+  },
+  validateNickname: function(nickname) {
+    if (!nickname) {
+      alert("The nickname cannot be empty!");
+      return;
+    }
   }
 };
