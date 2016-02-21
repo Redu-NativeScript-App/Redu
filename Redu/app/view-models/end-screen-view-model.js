@@ -5,6 +5,8 @@ var EndScreenModel = (function (_super) {
         _super.call(this);
 
     }
+
+    return EndScreenModel;
 })(observable.Observable);
 
 exports.EndScreenModel = EndScreenModel;

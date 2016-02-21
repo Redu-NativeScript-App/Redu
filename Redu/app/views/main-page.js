@@ -2,6 +2,7 @@ var vmModule = require("../view-models/main-view-model");
 var view = require("ui/core/view");
 var frame = require("ui/frame");
 var services = require('../services/global-leaderboards-service');
+var helpers = require('../helpers').helpers;
 var topmost;
 var startBtn;
 var leaderboardBtn;
@@ -16,18 +17,17 @@ function pageLoaded(args) {
     startBtn = view.getViewById(page, "startBtn");
     leaderboardBtn = view.getViewById(page, "leaderboardBtn");
     settingsBtn = view.getViewById(page, "settingsBtn");
-    changeButtonStateIfPressed(startBtn);
-    changeButtonStateIfPressed(leaderboardBtn);
-    changeButtonStateIfPressed(settingsBtn);
 }
 
 function onStartBtnTapped() {
   startBtn.style.backgroundImage = btnPressed;
+  helpers.changeButtonStateIfPressed(startBtn);
   topmost.navigate("./views/game-page");
 }
 
 function onLeaderboardBtnTapped() {
   leaderboardBtn.style.backgroundImage = btnPressed;
+  helpers.changeButtonStateIfPressed(leaderboardBtn);
 
   services.getAllHighscores()
     .then(function(data) {
@@ -38,19 +38,13 @@ function onLeaderboardBtnTapped() {
       };
       topmost.navigate(navigationEntry);
     });
-
 }
-
 
 function onSettingsBtnTapped() {
   settingsBtn.style.backgroundImage = btnPressed;
-  topmost.navigate("./views/settings-page");
-}
-
-function changeButtonStateIfPressed(button) {
-  if (button.style.backgroundImage === btnPressed) {
-    button.style.backgroundImage = btnUnpressed;
-  }
+  helpers.changeButtonStateIfPressed(settingsBtn);
+  // topmost.navigate("./views/settings-page");
+  topmost.navigate("./views/end-screen-page");
 }
 
 exports.pageLoaded = pageLoaded;

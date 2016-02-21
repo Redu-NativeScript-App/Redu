@@ -17,5 +17,11 @@ exports.helpers = {
       }
     }
     return undefined;
+  },
+  changeButtonStateIfPressed: function(button) {
+    var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
+    setTimeout(function() {
+        button.style.backgroundImage = btnUnpressed;
+    }, 200);
   }
 };

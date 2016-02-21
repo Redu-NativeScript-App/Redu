@@ -1,3 +1,8 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
-
+  <StackLayout>
+    <Label text="Congrats" class="score-title"/>
+    <Label text="Your Score:" class="title"/>
+    <Label text="50" class="score-label"/>
+    <Button text="Share" tap="onShareTapped" id="shareBtn" />
+  </StackLayout>
 </Page>

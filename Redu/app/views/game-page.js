@@ -8,24 +8,26 @@ var helpers = require("../helpers").helpers;
 var animationModule = require("ui/animation");
 var platformModule = require("platform");
 
+var screenWidth;
+var screenHeight;
+
 var numberOfColumns = 4;
 var numberOfRows = 5;
 
-var rowHeight = 120;
-var screenWidth;
-var gameSpeed = 8000;
+var gameSpeed = 4000;
 var gridHeight = 0;
 
+var rowHeight = 120;
 var mainColorLabel;
 
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = vmModule.gameViewModel;
-
     var firstGrid = page.getViewById("firstGrid");
     var secondGrid = page.getViewById("secondGrid");
     mainColorLabel = page.getViewById("pointsLabel");
     screenWidth = platformModule.screen.mainScreen.widthDIPs;
+    screenHeight = platformModule.screen.mainScreen.heightDIPs;
     initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
 }
 
@@ -52,6 +54,8 @@ function changeMainColor() {
 
 function onTap(args) {
   vmModule.gameViewModel.setPoints(++points);
+  args.object.style.backgroundColor = 'White';
+  args.object.style.backgroundImage = '../images/broken.png';
 }
 
 function onDoubleTap(args) {
@@ -75,7 +79,7 @@ function animateGrid(grid, duration) {
     }
   })
   .then(function() {
-    return grid.animate({
+      return grid.animate({
       duration: duration,
       translate: {
         x: 0,
