@@ -37,6 +37,12 @@ button {
   margin: 20;
 }
 
+#pointsLabel {
+  text-align: center;
+  color: white;
+  font-size: 80px;
+}
+
 .message {
     font-size: 20;
     color: #284848;
