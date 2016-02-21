@@ -5,7 +5,9 @@ function getAllHighscores() {
   var url = baseUrl + '/api/highscores';
   return fetch(url)
     .then(function(response) {
-      return response.json();
+      return new Promise(function(resolve, reject) {
+        resolve(response.json());
+      });
     })
     .then(function(json) {
       return json.result;

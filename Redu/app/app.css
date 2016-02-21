@@ -29,6 +29,14 @@ button {
     margin: 20;
 }
 
+.title-leaderboard {
+  font-size: 37;
+  font-family: Gretoon;
+  color: white;
+  horizontal-align: center;
+  margin: 20;
+}
+
 .message {
     font-size: 20;
     color: #284848;
@@ -41,4 +49,9 @@ button {
   font-family: GretoonHighlight;
   padding-left: 15;
   width: 230;
+}
+
+.course-title{
+  color: black;
+  font-size: 24;
 }

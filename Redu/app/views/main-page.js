@@ -1,6 +1,7 @@
 var vmModule = require("../view-models/main-view-model");
 var view = require("ui/core/view");
 var frame = require("ui/frame");
+var services = require('../services/global-leaderboards-service');
 var topmost;
 var startBtn;
 var leaderboardBtn;
@@ -27,8 +28,19 @@ function onStartBtnTapped() {
 
 function onLeaderboardBtnTapped() {
   leaderboardBtn.style.backgroundImage = btnPressed;
-  topmost.navigate("./views/global-leaderboard-page");
+
+  services.getAllHighscores()
+    .then(function(data) {
+      var navigationEntry = {
+        moduleName: "./views/global-leaderboard-page",
+        context: { data: data },
+        animated: false
+      };
+      topmost.navigate(navigationEntry);
+    });
+
 }
+
 
 function onSettingsBtnTapped() {
   settingsBtn.style.backgroundImage = btnPressed;
