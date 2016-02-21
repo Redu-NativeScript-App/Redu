@@ -40,7 +40,7 @@ button {
 .message {
     font-size: 20;
     color: #284848;
-    horizontal-align: center;
+
 }
 
 .settins-labels {
@@ -51,7 +51,17 @@ button {
   width: 230;
 }
 
-.course-title{
-  color: black;
-  font-size: 24;
+.score-title{
+  font-size: 45;
+  font-family: Gretoon;
+  color: white;
+  horizontal-align: center;
+  margin-top: 75;
+}
+
+.score-label {
+  font-size: 80;
+  font-family: GretoonHighlight;
+  color: blue;
+  horizontal-align: center;
 }

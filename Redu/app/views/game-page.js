@@ -5,19 +5,21 @@ var layout = require("ui/layouts/grid-layout");
 var colorModule = require("color");
 var globals = require("../globals").globals;
 var helpers = require("../helpers").helpers;
-var animationModule = require("ui/animation");
+var platformModule = require("platform");
+
+var screenWidth;
+var screenHeight;
 
 var numberOfColumns = 4;
 var numberOfRows = 5;
 
-var rowHeight = 120;
-
-var gameSpeed = 1500;
-var gridHeight = 0;
+var gameSpeed = 3000;
 
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = vmModule.gameViewModel;
+    screenWidth = platformModule.screen.mainScreen.widthPixels;
+    screenHeight = platformModule.screen.mainScreen.heightPixels;
     var firstGrid = page.getViewById("firstGrid");
     var secondGrid = page.getViewById("secondGrid");
     initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
@@ -26,12 +28,13 @@ function pageLoaded(args) {
 function initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed) {
   populateGrid(firstGrid, numberOfColumns, numberOfRows);
   populateGrid(secondGrid, numberOfColumns, numberOfRows);
-  gridHeight = rowHeight * numberOfRows;
 
-  animateGrid(secondGrid, gameSpeed);
-  setTimeout(function() {
+  setInterval(function() {
+    recolorGrid(firstGrid);
+    recolorGrid(secondGrid);
     animateGrid(firstGrid, gameSpeed);
-  }, gameSpeed / 2);
+    animateGrid(secondGrid, gameSpeed);
+  }, gameSpeed);
 }
 
 function onTap(args) {
@@ -54,33 +57,33 @@ function animateGrid(grid, duration) {
     duration: 0,
     translate: {
       x: 0,
-      y: -gridHeight
+      y: -screenHeight
     }
   })
   .then(function() {
-    return grid.animate({
-      duration: duration,
-      translate: {
-        x: 0,
-        y: gridHeight
-      },
-      iterations: Number.POSITIVE_INFINITY,
-      curve: 'linear'
+      return grid.animate({
+        duration: duration,
+        translate: {
+          x: 0,
+          y: screenHeight/numberOfRows
+        }
+      });
     });
-  });
 }
 
 function populateGrid(grid, numberOfColumns, numberOfRows) {
+  var rowHeight = Math.ceil(screenHeight / numberOfRows);
   var i;
   for (i = 0; i < numberOfColumns; i++) {
     grid.addColumn(new layout.ItemSpec(1, layout.GridUnitType.star));
   }
 
   for (i = 0; i < numberOfRows; i++) {
-    grid.addRow(new layout.ItemSpec(rowHeight, layout.GridUnitType.pixel));
+    grid.addRow(new layout.ItemSpec(1, layout.GridUnitType.star));
     for (var j = 0; j < numberOfColumns; j++) {
         var element = new buttonModule.Label();
         element.style.backgroundColor = helpers.getRandomElement(globals.colors);
+        element.style.height = rowHeight;
         element.text = i + " " + j;
         element.on('tap', onTap);
         element.on('doubleTap', onDoubleTap);
