@@ -6,20 +6,26 @@ var colorModule = require("color");
 var globals = require("../globals").globals;
 var helpers = require("../helpers").helpers;
 var animationModule = require("ui/animation");
+var platformModule = require("platform");
 
 var numberOfColumns = 4;
 var numberOfRows = 5;
 
 var rowHeight = 120;
-
-var gameSpeed = 1500;
+var screenWidth;
+var gameSpeed = 8000;
 var gridHeight = 0;
+
+var mainColorLabel;
 
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = vmModule.gameViewModel;
+
     var firstGrid = page.getViewById("firstGrid");
     var secondGrid = page.getViewById("secondGrid");
+    mainColorLabel = page.getViewById("pointsLabel");
+    screenWidth = platformModule.screen.mainScreen.widthDIPs;
     initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
 }
 
@@ -28,13 +34,24 @@ function initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRo
   populateGrid(secondGrid, numberOfColumns, numberOfRows);
   gridHeight = rowHeight * numberOfRows;
 
+  setInterval(function() {
+    changeMainColor();
+  }, 10000);
+
   animateGrid(secondGrid, gameSpeed);
   setTimeout(function() {
     animateGrid(firstGrid, gameSpeed);
   }, gameSpeed / 2);
 }
 
+var points = 0;
+
+function changeMainColor() {
+  mainColorLabel.style.backgroundColor = helpers.getRandomElement(globals.colors);
+}
+
 function onTap(args) {
+  vmModule.gameViewModel.setPoints(++points);
 }
 
 function onDoubleTap(args) {
@@ -73,7 +90,7 @@ function animateGrid(grid, duration) {
 function populateGrid(grid, numberOfColumns, numberOfRows) {
   var i;
   for (i = 0; i < numberOfColumns; i++) {
-    grid.addColumn(new layout.ItemSpec(1, layout.GridUnitType.star));
+    grid.addColumn(new layout.ItemSpec(screenWidth / numberOfColumns, layout.GridUnitType.pixel));
   }
 
   for (i = 0; i < numberOfRows; i++) {
@@ -81,7 +98,6 @@ function populateGrid(grid, numberOfColumns, numberOfRows) {
     for (var j = 0; j < numberOfColumns; j++) {
         var element = new buttonModule.Label();
         element.style.backgroundColor = helpers.getRandomElement(globals.colors);
-        element.text = i + " " + j;
         element.on('tap', onTap);
         element.on('doubleTap', onDoubleTap);
         element.on('longPress', onLongPress);
