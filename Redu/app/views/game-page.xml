@@ -1,3 +1,10 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
-  <GridLayout id="grid"></GridLayout>
+  <StackLayout>
+    <StackLayout>
+      <GridLayout id="secondGrid"></GridLayout>
+    </StackLayout>
+    <StackLayout>
+      <GridLayout id="firstGrid"></GridLayout>
+    </StackLayout>
+  </StackLayout>
 </Page>

@@ -1,14 +1,35 @@
-'use strict';
-
-let fetch = require('fetch').fetch;
+var fetch = require('fetch').fetch;
+var baseUrl = "https://calm-ravine-43473.herokuapp.com";
 
 function getAllHighscores() {
+  var url = baseUrl + '/api/highscores';
+  return fetch(url)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(json) {
+      return json.result;
+    });
 }
 
-function getHighscoreByName() {
+function addNewHighscore(highscore) {
+  var url = baseUrl + '/api/highscores';
+  return fetch(url, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(highscore)
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(json) {
+    return json.result;
+  });
 }
 
 module.exports = {
-  getAllHighscores,
-  getHighscoreByName
+  getAllHighscores: getAllHighscores,
+  addNewHighscore: addNewHighscore
 };

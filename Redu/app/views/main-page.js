@@ -7,6 +7,7 @@ var leaderboardBtn;
 var settingsBtn;
 var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
 var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
+
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = vmModule.mainViewModel;
