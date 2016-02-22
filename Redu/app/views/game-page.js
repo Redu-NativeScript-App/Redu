@@ -19,6 +19,7 @@ var gridHeight = 0;
 
 var rowHeight = 120;
 var mainColorLabel;
+var points;
 
 function pageLoaded(args) {
     var page = args.object;
@@ -28,6 +29,7 @@ function pageLoaded(args) {
     mainColorLabel = page.getViewById("pointsLabel");
     screenWidth = platformModule.screen.mainScreen.widthDIPs;
     screenHeight = platformModule.screen.mainScreen.heightDIPs;
+    points = 0;
     initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
 }
 
@@ -45,8 +47,6 @@ function initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRo
     animateGrid(firstGrid, gameSpeed);
   }, gameSpeed / 2);
 }
-
-var points = 0;
 
 function changeMainColor() {
   mainColorLabel.style.backgroundColor = helpers.getRandomElement(globals.colors);
@@ -85,9 +85,11 @@ function animateGrid(grid, duration) {
         x: 0,
         y: gridHeight
       },
-      iterations: Number.POSITIVE_INFINITY,
       curve: 'linear'
     });
+  })
+  .then(function() {
+    recolorGrid(grid);
   });
 }
 

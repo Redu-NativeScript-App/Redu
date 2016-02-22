@@ -1,27 +1,26 @@
-// var vmModule = require("../view-models/global-leaderboard-view-model");
-//
-// function pageLoaded(args) {
-//     var page = args.object;
-//     page.bindingContext = vmModule.globalLeaderboardViewModel;
-// }
-//
-// exports.pageLoaded = pageLoaded;
-
-var ObservableArray = require('data/observable-array')
-  .ObservableArray;
-
 var frame = require('ui/frame');
 var vmModule = require("../view-models/global-leaderboard-view-model");
+var leaderboardService = require("../services/global-leaderboards-service");
 var page;
+
+var list;
 
 function pageLoaded(args) {
   page = args.object;
-
   page.bindingContext = vmModule.leaderboardViewModel;
+  getHighscores();
 }
 
-function navigatedToPage(args) {
- var data = args.object.navigationContext.data;
- console.log(data);
- args.object.bindingContext.setHighscores(["asd"]);
+function getHighscores(){
+  leaderboardService.getAllHighscores()
+    .then(function(data){
+      for (var i = 0; i < data.length; i++) {
+        var currentLine = data[i].name + '|' + data[i].score + '|' + data[i].location;
+        page.bindingContext.highscores.push(currentLine);
+      }
+    }, function(err) {
+      console.log(err.message);
+    });
 }
+
+exports.pageLoaded = pageLoaded;

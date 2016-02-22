@@ -6,6 +6,7 @@ function getAllHighscores() {
   return fetch(url)
     .then(function(response) {
       return new Promise(function(resolve, reject) {
+        console.log('here');
         resolve(response.json());
       });
     })
