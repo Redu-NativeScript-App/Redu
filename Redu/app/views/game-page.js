@@ -16,13 +16,13 @@ var screenHeight;
 var numberOfColumns = 4;
 var numberOfRows = 5;
 
-var gameSpeed = 4000;
+var gameSpeed = 7000;
 var gridHeight = 0;
 
 var rowHeight = 120;
 var mainColorLabel;
 var points;
-
+var nextColor;
 function pageLoaded(args) {
     orientationModule.setCurrentOrientation("portrait");
     var page = args.object;
@@ -33,6 +33,7 @@ function pageLoaded(args) {
     screenWidth = platformModule.screen.mainScreen.widthDIPs;
     screenHeight = platformModule.screen.mainScreen.heightDIPs;
     points = 0;
+    nextColor = helpers.getRandomElement(globals.colors);
     initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
 }
 
@@ -41,25 +42,41 @@ function initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRo
   populateGrid(secondGrid, numberOfColumns, numberOfRows);
   gridHeight = rowHeight * numberOfRows;
 
+  changeMainColor();
+  mainAnimation(firstGrid, secondGrid, gameSpeed);
   setInterval(function() {
     changeMainColor();
   }, 10000);
+
   setInterval(function() {
-    animateGrid(secondGrid, gameSpeed);
-    setTimeout(function() {
-      animateGrid(firstGrid, gameSpeed);
-    }, gameSpeed / 2);
+    mainAnimation(firstGrid, secondGrid, gameSpeed);
   }, gameSpeed);
 }
 
+function mainAnimation(firstGrid, secondGrid, gameSpeed) {
+  animateGrid(secondGrid, gameSpeed);
+  setTimeout(function() {
+    animateGrid(firstGrid, gameSpeed);
+  }, gameSpeed / 2);
+}
+
 function changeMainColor() {
-  mainColorLabel.style.backgroundColor = helpers.getRandomElement(globals.colors);
+  var color = helpers.getRandomElement(globals.colors);
+  mainColorLabel.style.backgroundColor = color;
+  mainColorLabel.clickColor = color;
 }
 
 function onTap(args) {
-  vmModule.gameViewModel.setPoints(++points);
-  args.object.style.backgroundColor = 'White';
-  args.object.style.backgroundImage = '../images/broken.png';
+  if (args.object.clickColor.localeCompare(mainColorLabel.clickColor) !== 0) {
+    endGame(points);
+    return;
+  }
+
+  if (!args.object.clicked) {
+    vmModule.gameViewModel.setPoints(++points);
+    args.object.clicked = true;
+    args.object.style.backgroundColor = 'White';
+  }
 }
 
 function onDoubleTap(args) {
@@ -98,11 +115,11 @@ function animateGrid(grid, duration) {
 }
 
 function endGame(points) {
-  points = 25;
   var navigationEntry = {
     moduleName: "./views/end-screen-page",
     context: { points: points },
-    animated: true
+    animated: true,
+    backstackVisible: false
   };
 
   topmost.navigate(navigationEntry);
@@ -118,7 +135,10 @@ function populateGrid(grid, numberOfColumns, numberOfRows) {
     grid.addRow(new layout.ItemSpec(rowHeight, layout.GridUnitType.pixel));
     for (var j = 0; j < numberOfColumns; j++) {
         var element = new buttonModule.Label();
-        element.style.backgroundColor = helpers.getRandomElement(globals.colors);
+        var color = helpers.getRandomElement(globals.colors);
+        element.style.backgroundColor = color;
+        element.clickColor = color;
+        element.clicked = false;
         element.on('tap', onTap);
         element.on('doubleTap', onDoubleTap);
         element.on('longPress', onLongPress);
