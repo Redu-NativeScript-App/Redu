@@ -3,8 +3,7 @@
     <Label text="Congrats" class="score-title"/>
     <Label text="Your Score:" class="title"/>
     <Label text="50" class="score-label" id="score"/>
-    <Button text="Share" tap="onShareTapped" id="shareBtn" />
-      <Button text="Location" tap="onLocationTapped" id="shareBtn" />
-
+    <Button text="Take a selfie" tap="onSelfieTapped" id="selfieBtn" />
+    <Button text="Share" tap="onShareTapped" id="shareBtn" />    
   </StackLayout>
 </Page>

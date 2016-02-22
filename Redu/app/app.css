@@ -2,12 +2,6 @@ page{
   background-color: #FF5400;
 }
 
-/*This way the ActionBar is invisible*/
-/*ActionBar {
-  background-color: #FF5400;
-  color: #FF5400;
-}*/
-
 button {
     font-size: 30;
     font-family: GretoonHighlight;
@@ -62,7 +56,7 @@ button {
   font-family: Gretoon;
   color: white;
   horizontal-align: center;
-  margin-top: 75;
+  margin-top: 40;
 }
 
 .score-label {
