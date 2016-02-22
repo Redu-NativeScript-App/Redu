@@ -4,6 +4,6 @@
     <Button text="START" tap="onStartBtnTapped" id="startBtn" />
     <Button text="LEADERBOARD" tap="onLeaderboardBtnTapped" id="leaderboardBtn"/>
     <Button text="YOUR SCORES" tap="onLocalScoresBtnTapped" id="localScoresBtn"/>
-    <Button text="SETTINGS" tap="onSettingsBtnTapped" id="settingsBtn" />
+    <Button text="ABOUT" tap="onAboutBtnTapped" id="aboutBtn" />
   </StackLayout>
 </Page>

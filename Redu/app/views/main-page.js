@@ -11,7 +11,7 @@ var topmost;
 var tada;
 var startBtn;
 var leaderboardBtn;
-var settingsBtn;
+var aboutBtn;
 var localScoresBtn;
 var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
 var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
@@ -24,8 +24,9 @@ function pageLoaded(args) {
     topmost = frame.topmost();
     startBtn = view.getViewById(page, "startBtn");
     leaderboardBtn = view.getViewById(page, "leaderboardBtn");
-    settingsBtn = view.getViewById(page, "settingsBtn");
+    aboutBtn = view.getViewById(page, "aboutBtn");
     localScoresBtn = view.getViewById(page, "localScoresBtn");
+      sounds.playSound("1");
 }
 
 function onStartBtnTapped() {
@@ -52,16 +53,16 @@ function onLocalScoresBtnTapped() {
   topmost.navigate("./views/local-highscores-page");
 }
 
-function onSettingsBtnTapped() {
+function onAboutBtnTapped() {
   sounds.playSound("Click");
-  settingsBtn.style.backgroundImage = btnPressed;
-  helpers.changeButtonStateIfPressed(settingsBtn);
-  topmost.navigate("./views/settings-page");
+  aboutBtn.style.backgroundImage = btnPressed;
+  helpers.changeButtonStateIfPressed(aboutBtn);
+  topmost.navigate("./views/about-page");
   //topmost.navigate("./views/end-screen-page");
 }
 
 exports.pageLoaded = pageLoaded;
 exports.onStartBtnTapped = onStartBtnTapped;
 exports.onLeaderboardBtnTapped = onLeaderboardBtnTapped;
-exports.onSettingsBtnTapped = onSettingsBtnTapped;
 exports.onLocalScoresBtnTapped = onLocalScoresBtnTapped;
+exports.onAboutBtnTapped = onAboutBtnTapped;
