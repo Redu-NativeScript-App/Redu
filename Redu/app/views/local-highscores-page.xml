@@ -3,7 +3,7 @@
     <Label text="Your scores" class="title-leaderboard"/>
     <ListView id="list" items="{{ localScores }}">
        <ListView.itemTemplate>
-         <Label text="{{ $value }}" />
+         <Label text="{{ $value }}" class="leadeboard-lv-style"/>
        </ListView.itemTemplate>
     </ListView>
   </StackLayout>

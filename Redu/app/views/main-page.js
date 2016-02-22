@@ -3,10 +3,12 @@ var view = require("ui/core/view");
 var frame = require("ui/frame");
 var services = require('../services/global-leaderboards-service');
 var helpers = require('../helpers').helpers;
+var sounds = require('../sounds').sounds;
 var orientationModule = require("nativescript-screen-orientation");
 
 var page;
 var topmost;
+var tada;
 var startBtn;
 var leaderboardBtn;
 var settingsBtn;
@@ -27,12 +29,15 @@ function pageLoaded(args) {
 }
 
 function onStartBtnTapped() {
+  sounds.playSound("Click");
   startBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(startBtn);
+
   topmost.navigate("./views/game-page");
 }
 
 function onLeaderboardBtnTapped() {
+  sounds.playSound("Click");
   leaderboardBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(leaderboardBtn);
 
@@ -40,6 +45,7 @@ function onLeaderboardBtnTapped() {
 }
 
 function onLocalScoresBtnTapped() {
+  sounds.playSound("Click");
   localScoresBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(localScoresBtn);
 
@@ -47,6 +53,7 @@ function onLocalScoresBtnTapped() {
 }
 
 function onSettingsBtnTapped() {
+  sounds.playSound("Click");
   settingsBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(settingsBtn);
   topmost.navigate("./views/settings-page");
