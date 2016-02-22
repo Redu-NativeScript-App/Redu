@@ -3,6 +3,7 @@
     <Label text="Main Menu" class="title"/>
     <Button text="START" tap="onStartBtnTapped" id="startBtn" />
     <Button text="LEADERBOARD" tap="onLeaderboardBtnTapped" id="leaderboardBtn"/>
+    <Button text="YOUR SCORES" tap="onLocalScoresBtnTapped" id="localScoresBtn"/>
     <Button text="SETTINGS" tap="onSettingsBtnTapped" id="settingsBtn" />
   </StackLayout>
 </Page>

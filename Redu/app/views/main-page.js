@@ -7,6 +7,7 @@ var topmost;
 var startBtn;
 var leaderboardBtn;
 var settingsBtn;
+var localScoresBtn;
 var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
 var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
 
@@ -18,12 +19,7 @@ function pageLoaded(args) {
     startBtn = view.getViewById(page, "startBtn");
     leaderboardBtn = view.getViewById(page, "leaderboardBtn");
     settingsBtn = view.getViewById(page, "settingsBtn");
-
-    console.log('lol');
-    localScoresService.getAllLocalScores()
-    .then(function(asd) {
-      console.log('done');
-    });
+    localScoresBtn = view.getViewById(page, "localScoresBtn");
 }
 
 function onStartBtnTapped() {
@@ -39,6 +35,13 @@ function onLeaderboardBtnTapped() {
   topmost.navigate("./views/global-leaderboard-page");
 }
 
+function onLocalScoresBtnTapped() {
+  localScoresBtn.style.backgroundImage = btnPressed;
+  helpers.changeButtonStateIfPressed(localScoresBtn);
+
+  topmost.navigate("./views/local-highscores-page");
+}
+
 function onSettingsBtnTapped() {
   settingsBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(settingsBtn);
@@ -50,3 +53,4 @@ exports.pageLoaded = pageLoaded;
 exports.onStartBtnTapped = onStartBtnTapped;
 exports.onLeaderboardBtnTapped = onLeaderboardBtnTapped;
 exports.onSettingsBtnTapped = onSettingsBtnTapped;
+exports.onLocalScoresBtnTapped = onLocalScoresBtnTapped;

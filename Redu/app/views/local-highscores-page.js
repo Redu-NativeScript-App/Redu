@@ -1,18 +1,18 @@
-var vmModule = require("../view-models/local-highscore-view-model");
+var vmModule = require("../view-models/local-highscores-view-model");
 var localScoresService = require("../services/local-scores-service");
+
+var page;
+
 function pageLoaded(args) {
-  var page = args.object;
-  page.bindingContext = vmModule.localHighscoreViewModel;
+  page = args.object;
+  page.bindingContext = vmModule.localHighscoresViewModel;
   getLocalScores();
 }
 
 function getLocalScores(){
-  leaderboardService.getAllHighscores()
+  localScoresService.getAllLocalScores()
     .then(function(data){
-      for (var i = 0; i < data.length; i++) {
-        var currentLine = data[i].name + '|' + data[i].score + '|' + data[i].location;
-        page.bindingContext.highscores.push(currentLine);
-      }
+      page.bindingContext.localScores.push(data);
     }, function(err) {
       console.log(err.message);
     });

@@ -1,7 +1,8 @@
 var vmModule = require("../view-models/end-screen-view-model");
 var dialogs = require("ui/dialogs");
 var helpers = require('../helpers').helpers;
-var servises = require("../services/global-leaderboards-service");
+var globalScoreService = require("../services/global-leaderboards-service");
+var localScoreService = require("../services/local-scores-service");
 var cameraModule = require("camera");
 var imageModule = require("ui/image");
 var shareBtn;
@@ -20,7 +21,9 @@ function pageLoaded(args) {
     selfieBtn = page.getViewById("selfieBtn");
     imageContainer = page.getViewById("selfieContainer");
     scoreLabel = page.getViewById("scoreLabel");
-    scoreLabel.text = 50;
+    var playerScore = args.object.navigationContext.points;
+    scoreLabel.text = playerScore;
+    localScoreService.addNewLocalScore(playerScore);
 }
 
 function onSelfieTapped(args) {
