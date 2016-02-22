@@ -21,20 +21,22 @@ var vmModule = require("../view-models/game-view-model"),
     mainColorTimerId,
     mainAnimationTimerId,
     firstGrid,
-    secondGrid;
+    secondGrid,
+    invulnerabilityTime = 2000,
+    isCurrentlyInvulnerable = false;
 
 function pageLoaded(args) {
-    var page = args.object;
-    page.bindingContext = vmModule.gameViewModel;
-    firstGrid = page.getViewById("firstGrid");
-    secondGrid = page.getViewById("secondGrid");
-    mainColorLabel = page.getViewById("pointsLabel");
-    screenWidth = platformModule.screen.mainScreen.widthDIPs;
-    screenHeight = platformModule.screen.mainScreen.heightDIPs;
-    points = 0;
-    nextColor = helpers.getRandomElement(globals.colors);
-    numberOfColumns = page.navigationContext.numberOfColumns;
-    initializeComponents(numberOfColumns, numberOfRows);
+  var page = args.object;
+  page.bindingContext = vmModule.gameViewModel;
+  firstGrid = page.getViewById("firstGrid");
+  secondGrid = page.getViewById("secondGrid");
+  mainColorLabel = page.getViewById("pointsLabel");
+  screenWidth = platformModule.screen.mainScreen.widthDIPs;
+  screenHeight = platformModule.screen.mainScreen.heightDIPs;
+  points = 0;
+  nextColor = helpers.getRandomElement(globals.colors);
+  numberOfColumns = page.navigationContext.numberOfColumns;
+  initializeComponents(numberOfColumns, numberOfRows);
 }
 
 function initializeComponents(numberOfColumns, numberOfRows) {
@@ -44,8 +46,6 @@ function initializeComponents(numberOfColumns, numberOfRows) {
 
   changeMainColor();
   mainColorTimerId = setInterval(changeMainColor, 10000);
-
-  mainAnimation();
   mainAnimationTimerId = setInterval(mainAnimation, gameSpeed);
 }
 
@@ -57,7 +57,10 @@ function mainAnimation() {
 }
 
 function changeMainColor() {
-  console.log('CHANGED!');
+  isCurrentlyInvulnerable = true;
+  setTimeout(function() {
+    isCurrentlyInvulnerable = false;
+  }, invulnerabilityTime);
   mainColorLabel.style.backgroundColor = nextColor;
   mainColorLabel.clickColor = nextColor;
   do {
@@ -68,11 +71,8 @@ function changeMainColor() {
 }
 
 function onTap(args) {
-  console.log(args.object.clickColor);
-  console.log(mainColorLabel.clickColor);
-  if (args.object.clickColor.localeCompare(mainColorLabel.clickColor) !== 0) {
-    args.object.style.backgroundColor = "Black";
-    //endGame(points);
+  if (!isCurrentlyInvulnerable && (args.object.clickColor.localeCompare(mainColorLabel.clickColor) !== 0)) {
+    endGame(points);
     return;
   }
 
@@ -121,7 +121,7 @@ function endGame(points) {
   clearInterval(mainColorTimerId);
 
   var navigationEntry = {
-    moduleName: "./views/end-screen-page",
+    moduleName: "../views/end-screen-page",
     context: { points: points },
     animated: true,
   };
