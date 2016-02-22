@@ -121,7 +121,7 @@ function endGame(points) {
   clearInterval(mainColorTimerId);
 
   var navigationEntry = {
-    moduleName: "../views/end-screen-page",
+    moduleName: "./views/end-screen-page",
     context: { points: points },
     animated: true,
   };

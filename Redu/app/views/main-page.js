@@ -26,7 +26,6 @@ function pageLoaded(args) {
   leaderboardBtn = view.getViewById(page, "leaderboardBtn");
   aboutBtn = view.getViewById(page, "aboutBtn");
   localScoresBtn = view.getViewById(page, "localScoresBtn");
-  sounds.playSound("1");
 }
 
 function onStartBtnTapped() {
