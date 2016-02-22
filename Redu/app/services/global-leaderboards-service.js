@@ -18,7 +18,7 @@ function getAllHighscores() {
 function addNewHighscore(highscore) {
   var url = baseUrl + '/api/highscores';
   return fetch(url, {
-    method: 'post',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },

@@ -28,7 +28,14 @@ button {
   font-family: Gretoon;
   color: white;
   horizontal-align: center;
-  margin: 20;
+  margin-top: 10;
+}
+
+.leadeboard-lv-style{
+  margin-left: 10;
+  font-size: 22;
+  font-family: Gretoon;
+  color: yellow;
 }
 
 #pointsLabel {

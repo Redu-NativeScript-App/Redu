@@ -44,6 +44,23 @@ function onShareTapped(){
     nickname = res.text;
 
     console.log("Dialog result: " + res.result + ", text: " + res.text);
+  })
+  .then(function () {
+
+    score = +page.getViewById("score").text;
+    console.log("-----------------------------");
+    console.log(selfie);
+    console.log(score);
+    console.log(nickname);
+
+
+    var currentHighscore = {
+      score: "23",
+      name: "peshoooooo",
+      selfie: "sadsadsad"
+    };
+
+    services.addNewHighscore(currentHighscore);
   });
 
 

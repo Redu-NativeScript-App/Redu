@@ -3,7 +3,7 @@
     <StackLayout id="end-game-container">
       <Label text="Congrats" class="score-title"/>
       <Label text="Score:" class="title"/>
-      <Label id="scoreLabel" class="title"/>
+      <Label id="scoreLabel" class="score-label"/>
       <Image id="selfieContainer"/>
       <Button text="Take a selfie" tap="onSelfieTapped" id="selfieBtn" />
       <Button text="Share" tap="onShareTapped" id="shareBtn" />
