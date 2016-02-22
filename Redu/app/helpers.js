@@ -1,8 +1,9 @@
-var Toast = require("nativescript-toast");
-
 exports.helpers = {
   getRandomElement: function(items) {
     return items[Math.floor(Math.random()*items.length)];
+  },
+  getRandomNumberInRange: function(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
   },
   hitTest(layout, location, numberOfColumns) {
     // TODO: Optimize. Hint: width abs(cy - y > width)
@@ -26,11 +27,11 @@ exports.helpers = {
         button.style.backgroundImage = btnUnpressed;
     }, 200);
   },
-  validateNickname: function(nickname) {
-    if (!nickname || name.length > 12) {
-      var toast = Toast.makeText("Invalid Name!");
-      toast.show();
-      return;
+  isNameValid: function(nickname) {
+    if (!nickname) {
+      return false;
     }
+
+    return true;
   }
 };

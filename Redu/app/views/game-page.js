@@ -71,13 +71,22 @@ function changeMainColor() {
 }
 
 function onTap(args) {
+  handleGesture(args, 1);
+}
+
+function onDoubleTap(args) {
+  handleGesture(args, 5);
+}
+
+function handleGesture(args, numberOfPoints) {
   if (!isCurrentlyInvulnerable && (args.object.clickColor.localeCompare(mainColorLabel.clickColor) !== 0)) {
     endGame(points);
     return;
   }
 
   if (!args.object.clicked) {
-    vmModule.gameViewModel.setPoints(++points);
+    points += numberOfPoints;
+    vmModule.gameViewModel.setPoints(points);
     args.object.clicked = true;
     args.object.style.backgroundColor = 'White';
   }
@@ -90,6 +99,7 @@ function recolorGrid(grid) {
     child.style.backgroundColor = color;
     child.clicked = false;
     child.clickColor = color;
+    child.text = '';
   }
 }
 
@@ -143,7 +153,15 @@ function populateGrid(grid, numberOfColumns, numberOfRows) {
         element.style.backgroundColor = color;
         element.clickColor = color;
         element.clicked = false;
-        element.on('tap', onTap);
+        element.className = 'gameBlock';
+        var number = helpers.getRandomNumberInRange(1, 15);
+        console.log(number);
+        if (number == 2) {
+          element.on('doubleTap', onDoubleTap);
+          element.text = '!';
+        } else {
+          element.on('tap', onTap);
+        }
         layout.GridLayout.setColumn(element, j);
         layout.GridLayout.setRow(element, i);
         grid.addChild(element);

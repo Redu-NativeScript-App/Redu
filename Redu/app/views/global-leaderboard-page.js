@@ -22,8 +22,7 @@ function getHighscores(){
       loader.hide();
       page.bindingContext.highscores.splice(0);
       for (var i = 0; i < top10; i++) {
-          var currentLine = (i + 1) + '. ' +  data[i].name + ' ' + data[i].score;
-      //  var currentLine = data[i].name + '|' + data[i].score + '|' + data[i].selfie;
+        var currentLine = (i + 1) + '. ' +  data[i].name + ' ' + data[i].score;
         page.bindingContext.highscores.push(currentLine);
       }
     }, function(err) {

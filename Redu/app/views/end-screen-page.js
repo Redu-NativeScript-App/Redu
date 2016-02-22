@@ -1,21 +1,24 @@
-var vmModule = require("../view-models/end-screen-view-model");
-var dialogs = require("ui/dialogs");
-var helpers = require('../helpers').helpers;
-var globalScoreService = require("../services/global-leaderboards-service");
-var localScoreService = require("../services/local-scores-service");
-var cameraModule = require("camera");
-var imageModule = require("ui/image");
-var orientationModule = require("nativescript-screen-orientation");
-
-var shareBtn;
-var selfieBtn;
-var page;
-var nickname;
-var score;
-var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
-var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
-var imageContainer;
-var scoreLabel;
+var vmModule = require("../view-models/end-screen-view-model"),
+    dialogs = require("ui/dialogs"),
+    helpers = require('../helpers').helpers,
+    topmost = require('ui/frame').topmost(),
+    globalScoreService = require("../services/global-leaderboards-service"),
+    localScoreService = require("../services/local-scores-service"),
+    cameraModule = require("camera"),
+    imageModule = require("ui/image"),
+    orientationModule = require("nativescript-screen-orientation"),
+    notifier = require("../notification-manager"),
+    shareBtn,
+    selfieBtn,
+    page,
+    nickname,
+    score,
+    btnPressed = "url('~/images/green-rect-btn-pressed.png')",
+    btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')",
+    imageContainer,
+    scoreLabel,
+    selfieAsBase64,
+    playerScore;
 
 function pageLoaded(args) {
     orientationModule.setCurrentOrientation("portrait");
@@ -24,7 +27,7 @@ function pageLoaded(args) {
     selfieBtn = page.getViewById("selfieBtn");
     imageContainer = page.getViewById("selfieContainer");
     scoreLabel = page.getViewById("scoreLabel");
-    var playerScore = args.object.navigationContext.points;
+    playerScore = args.object.navigationContext.points;
     scoreLabel.text = playerScore;
     localScoreService.addNewLocalScore(playerScore);
 }
@@ -36,39 +39,44 @@ function onSelfieTapped(args) {
     cameraModule.takePicture()
     .then(function(picture) {
       imageContainer.imageSource = picture;
+      selfieAsBase64 = picture.toBase64String();
       selfieBtn.text = "Take another";
     });
 }
 
-function onShareTapped(){
+function onShareTapped() {
   shareBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(shareBtn);
 
-  dialogs.prompt("Enter you name:", "").then(function (res) {
-    score = +page.getViewById("score").text;
-    helpers.validateNickname(res.text);
-    nickname = res.text;
+  dialogs.prompt("Enter your name: ", "")
+  .then(function (res) {
+    var isValid = helpers.isNameValid(res.text);
+    if (!isValid) {
+      notifier.show("Invalid name!");
+      return;
+    }
 
     console.log("Dialog result: " + res.result + ", text: " + res.text);
+
+    return new Promise(function(resolve, reject) {
+      resolve({
+        score: playerScore,
+        name: res.text,
+        selfie: selfieAsBase64
+      });
+    });
   })
-  .then(function () {
+  .then(function (highscore) {
+    if (!highscore.selfie) {
+      notifier.show("You must take a victory selfie");
+      return;
+    }
 
-    score = +page.getViewById("score").text;
-    console.log("-----------------------------");
-    console.log(selfie);
-    console.log(score);
-    console.log(nickname);
-
-
-    var currentHighscore = {
-      score: "23",
-      name: "peshoooooo",
-      selfie: "sadsadsad"
-    };
-
-    services.addNewHighscore(currentHighscore);
+    globalScoreService.addNewHighscore(highscore)
+    .then(function() {
+      topmost.goBack();
+    });
   });
-
 
 }
 

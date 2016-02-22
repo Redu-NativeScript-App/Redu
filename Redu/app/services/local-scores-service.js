@@ -1,6 +1,6 @@
 var fs = require("file-system");
 
-var scoresFileName = 'Redu-Local-Scores-File2.txt';
+var scoresFileName = 'Redu-Local-Scores-File3.txt';
 var documents = fs.knownFolders.documents();
 var file = documents.getFile(scoresFileName);
 
@@ -9,6 +9,9 @@ function getAllLocalScores() {
     file.readText()
     .then(function(text) {
       var scores = text.split(',');
+      scores.sort(function(a, b) {
+        return b - a;
+      });
       resolve(scores);
     });
   });
@@ -23,7 +26,7 @@ function addNewLocalScore(score) {
         return;
       }
 
-      var newValue;
+      var newValue = '';
       if (text) {
         newValue = ',';
       }

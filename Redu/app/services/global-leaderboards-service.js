@@ -25,7 +25,9 @@ function addNewHighscore(highscore) {
     body: JSON.stringify(highscore)
   })
   .then(function(response) {
-    return response.json();
+    return new Promise(function(resolve, reject) {
+      resolve(response.json());
+    });
   })
   .then(function(json) {
     return json.result;
