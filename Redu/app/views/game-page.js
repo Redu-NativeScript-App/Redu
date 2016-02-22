@@ -31,7 +31,6 @@ function pageLoaded(args) {
     screenWidth = platformModule.screen.mainScreen.widthDIPs;
     screenHeight = platformModule.screen.mainScreen.heightDIPs;
     points = 0;
-    endGame();
     initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
 }
 
@@ -43,11 +42,12 @@ function initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRo
   setInterval(function() {
     changeMainColor();
   }, 10000);
-
-  animateGrid(secondGrid, gameSpeed);
-  setTimeout(function() {
-    animateGrid(firstGrid, gameSpeed);
-  }, gameSpeed / 2);
+  setInterval(function() {
+    animateGrid(secondGrid, gameSpeed);
+    setTimeout(function() {
+      animateGrid(firstGrid, gameSpeed);
+    }, gameSpeed / 2);
+  }, gameSpeed);
 }
 
 function changeMainColor() {
