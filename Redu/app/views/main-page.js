@@ -10,6 +10,7 @@ var settingsBtn;
 var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
 var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
 
+var localScoresService = require('../services/local-scores-service');
 function pageLoaded(args) {
     var page = args.object;
     page.bindingContext = vmModule.mainViewModel;
@@ -17,6 +18,12 @@ function pageLoaded(args) {
     startBtn = view.getViewById(page, "startBtn");
     leaderboardBtn = view.getViewById(page, "leaderboardBtn");
     settingsBtn = view.getViewById(page, "settingsBtn");
+
+    console.log('lol');
+    localScoresService.getAllLocalScores()
+    .then(function(asd) {
+      console.log('done');
+    });
 }
 
 function onStartBtnTapped() {

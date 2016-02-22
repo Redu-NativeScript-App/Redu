@@ -37,10 +37,13 @@ button {
   font-size: 80px;
 }
 
+#selfieContainer {
+  margin: 10px;
+}
+
 .message {
     font-size: 20;
     color: #284848;
-
 }
 
 .settins-labels {

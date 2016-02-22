@@ -11,37 +11,39 @@ var nickname;
 var score;
 var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
 var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
+var imageContainer;
+var scoreLabel;
 
 function pageLoaded(args) {
     page = args.object;
     shareBtn = page.getViewById("shareBtn");
     selfieBtn = page.getViewById("selfieBtn");
-
-  //  page.bindingContext = vmModule.endScreenViewModel;s
+    imageContainer = page.getViewById("selfieContainer");
+    scoreLabel = page.getViewById("scoreLabel");
+    scoreLabel.text = 50;
 }
 
 function onSelfieTapped(args) {
     selfieBtn.style.backgroundImage = btnPressed;
     helpers.changeButtonStateIfPressed(selfieBtn);
 
-    cameraModule.takePicture().then(function(picture) {
-    console.log("Result is an image source instance");
-    var image = new imageModule.Image();
-    image.imageSource = picture;
-});
+    cameraModule.takePicture()
+    .then(function(picture) {
+      imageContainer.imageSource = picture;
+      selfieBtn.text = "Take another";
+    });
 }
 
 function onShareTapped(){
   shareBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(shareBtn);
 
-  dialogs.prompt("Enter you name:", "").then(function (r) {
+  dialogs.prompt("Enter you name:", "").then(function (res) {
     score = +page.getViewById("score").text;
-    helpers.validateNickname(r.text);
-    nickname = r.text;
+    helpers.validateNickname(res.text);
+    nickname = res.text;
 
-    //services.addNewHighscore()
-    console.log("Dialog result: " + r.result + ", text: " + r.text);
+    console.log("Dialog result: " + res.result + ", text: " + res.text);
   });
 
 

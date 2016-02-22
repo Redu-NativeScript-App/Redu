@@ -1,5 +1,6 @@
 var vmModule = require("../view-models/game-view-model");
 var frame = require("ui/frame");
+var topmost = frame.topmost();
 var buttonModule = require("ui/label");
 var layout = require("ui/layouts/grid-layout");
 var colorModule = require("color");
@@ -30,6 +31,7 @@ function pageLoaded(args) {
     screenWidth = platformModule.screen.mainScreen.widthDIPs;
     screenHeight = platformModule.screen.mainScreen.heightDIPs;
     points = 0;
+    endGame();
     initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
 }
 
@@ -91,6 +93,17 @@ function animateGrid(grid, duration) {
   .then(function() {
     recolorGrid(grid);
   });
+}
+
+function endGame(points) {
+  points = 25;
+  var navigationEntry = {
+    moduleName: "./views/end-screen-page",
+    context: { points: points },
+    animated: true
+  };
+
+  topmost.navigate(navigationEntry);
 }
 
 function populateGrid(grid, numberOfColumns, numberOfRows) {

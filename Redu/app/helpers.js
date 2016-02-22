@@ -25,8 +25,8 @@ exports.helpers = {
     }, 200);
   },
   validateNickname: function(nickname) {
-    if (!nickname) {
-      alert("The nickname cannot be empty!");
+    if (!nickname || name.length > 12) {
+      alert("Invalid name!");
       return;
     }
   }

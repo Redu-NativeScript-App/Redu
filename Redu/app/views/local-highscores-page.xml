@@ -1,3 +1,10 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
-
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" actionBarHidden="true" loaded="pageLoaded">
+  <StackLayout>
+    <Label text="Your scores" class="title-leaderboard"/>
+    <ListView id="list" items="{{ localScores }}">
+       <ListView.itemTemplate>
+         <Label text="{{ $value }}" />
+       </ListView.itemTemplate>
+    </ListView>
+  </StackLayout>
 </Page>

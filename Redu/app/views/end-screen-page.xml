@@ -1,9 +1,12 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
-  <StackLayout>
-    <Label text="Congrats" class="score-title"/>
-    <Label text="Your Score:" class="title"/>
-    <Label text="50" class="score-label" id="score"/>
-    <Button text="Take a selfie" tap="onSelfieTapped" id="selfieBtn" />
-    <Button text="Share" tap="onShareTapped" id="shareBtn" />    
-  </StackLayout>
+  <ScrollView>
+    <StackLayout id="end-game-container">
+      <Label text="Congrats" class="score-title"/>
+      <Label text="Score:" class="title"/>
+      <Label id="scoreLabel" class="title"/>
+      <Image id="selfieContainer"/>
+      <Button text="Take a selfie" tap="onSelfieTapped" id="selfieBtn" />
+      <Button text="Share" tap="onShareTapped" id="shareBtn" />
+    </StackLayout>
+  </ScrollView>
 </Page>
