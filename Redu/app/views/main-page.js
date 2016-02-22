@@ -3,7 +3,12 @@ var view = require("ui/core/view");
 var frame = require("ui/frame");
 var services = require('../services/global-leaderboards-service');
 var helpers = require('../helpers').helpers;
+var sounds = require('../sounds').sounds;
+var orientationModule = require("nativescript-screen-orientation");
+
+var page;
 var topmost;
+var tada;
 var startBtn;
 var leaderboardBtn;
 var settingsBtn;
@@ -13,7 +18,8 @@ var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
 
 var localScoresService = require('../services/local-scores-service');
 function pageLoaded(args) {
-    var page = args.object;
+    orientationModule.setCurrentOrientation("portrait");
+    page = args.object;
     page.bindingContext = vmModule.mainViewModel;
     topmost = frame.topmost();
     startBtn = view.getViewById(page, "startBtn");
@@ -23,6 +29,7 @@ function pageLoaded(args) {
 }
 
 function onStartBtnTapped() {
+  sounds.playSound("Click");
   startBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(startBtn);
 
@@ -35,6 +42,7 @@ function onStartBtnTapped() {
 }
 
 function onLeaderboardBtnTapped() {
+  sounds.playSound("Click");
   leaderboardBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(leaderboardBtn);
 
@@ -42,6 +50,7 @@ function onLeaderboardBtnTapped() {
 }
 
 function onLocalScoresBtnTapped() {
+  sounds.playSound("Click");
   localScoresBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(localScoresBtn);
 
@@ -49,10 +58,11 @@ function onLocalScoresBtnTapped() {
 }
 
 function onSettingsBtnTapped() {
+  sounds.playSound("Click");
   settingsBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(settingsBtn);
-  // topmost.navigate("./views/settings-page");
-  topmost.navigate("./views/end-screen-page");
+  topmost.navigate("./views/settings-page");
+  //topmost.navigate("./views/end-screen-page");
 }
 
 exports.pageLoaded = pageLoaded;

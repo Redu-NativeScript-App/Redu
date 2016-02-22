@@ -5,6 +5,8 @@ var globalScoreService = require("../services/global-leaderboards-service");
 var localScoreService = require("../services/local-scores-service");
 var cameraModule = require("camera");
 var imageModule = require("ui/image");
+var orientationModule = require("nativescript-screen-orientation");
+
 var shareBtn;
 var selfieBtn;
 var page;
@@ -16,6 +18,7 @@ var imageContainer;
 var scoreLabel;
 
 function pageLoaded(args) {
+    orientationModule.setCurrentOrientation("portrait");
     page = args.object;
     shareBtn = page.getViewById("shareBtn");
     selfieBtn = page.getViewById("selfieBtn");
