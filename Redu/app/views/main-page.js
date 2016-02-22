@@ -29,15 +29,7 @@ function onLeaderboardBtnTapped() {
   leaderboardBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(leaderboardBtn);
 
-  services.getAllHighscores()
-    .then(function(data) {
-      var navigationEntry = {
-        moduleName: "./views/global-leaderboard-page",
-        context: { data: data },
-        animated: false
-      };
-      topmost.navigate(navigationEntry);
-    });
+  topmost.navigate("./views/global-leaderboard-page");
 }
 
 function onSettingsBtnTapped() {
