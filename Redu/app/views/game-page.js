@@ -1,74 +1,78 @@
-var vmModule = require("../view-models/game-view-model");
-var frame = require("ui/frame");
-var topmost = frame.topmost();
-var buttonModule = require("ui/label");
-var layout = require("ui/layouts/grid-layout");
-var colorModule = require("color");
-var globals = require("../globals").globals;
-var helpers = require("../helpers").helpers;
-var animationModule = require("ui/animation");
-var platformModule = require("platform");
-var orientationModule = require("nativescript-screen-orientation");
+var vmModule = require("../view-models/game-view-model"),
+    frame = require("ui/frame"),
+    topmost = frame.topmost(),
+    labelModule = require("ui/label"),
+    layout = require("ui/layouts/grid-layout"),
+    colorModule = require("color"),
+    globals = require("../globals").globals,
+    helpers = require("../helpers").helpers,
+    animationModule = require("ui/animation"),
+    platformModule = require("platform"),
+    screenWidth,
+    screenHeight,
+    numberOfColumns = 6,
+    numberOfRows = 5,
+    gameSpeed = 7000,
+    gridHeight = 0,
+    rowHeight = 120,
+    mainColorLabel,
+    points,
+    nextColor,
+    mainColorTimerId,
+    mainAnimationTimerId,
+    firstGrid,
+    secondGrid;
 
-var screenWidth;
-var screenHeight;
-
-var numberOfColumns = 4;
-var numberOfRows = 5;
-
-var gameSpeed = 7000;
-var gridHeight = 0;
-
-var rowHeight = 120;
-var mainColorLabel;
-var points;
-var nextColor;
 function pageLoaded(args) {
-    orientationModule.setCurrentOrientation("portrait");
     var page = args.object;
     page.bindingContext = vmModule.gameViewModel;
-    var firstGrid = page.getViewById("firstGrid");
-    var secondGrid = page.getViewById("secondGrid");
+    firstGrid = page.getViewById("firstGrid");
+    secondGrid = page.getViewById("secondGrid");
     mainColorLabel = page.getViewById("pointsLabel");
     screenWidth = platformModule.screen.mainScreen.widthDIPs;
     screenHeight = platformModule.screen.mainScreen.heightDIPs;
     points = 0;
     nextColor = helpers.getRandomElement(globals.colors);
-    initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed);
+    numberOfColumns = page.navigationContext.numberOfColumns;
+    initializeComponents(numberOfColumns, numberOfRows);
 }
 
-function initializeComponents(firstGrid, secondGrid, numberOfColumns, numberOfRows, gameSpeed) {
+function initializeComponents(numberOfColumns, numberOfRows) {
   populateGrid(firstGrid, numberOfColumns, numberOfRows);
   populateGrid(secondGrid, numberOfColumns, numberOfRows);
   gridHeight = rowHeight * numberOfRows;
 
   changeMainColor();
-  mainAnimation(firstGrid, secondGrid, gameSpeed);
-  setInterval(function() {
-    changeMainColor();
-  }, 10000);
+  mainColorTimerId = setInterval(changeMainColor, 10000);
 
-  setInterval(function() {
-    mainAnimation(firstGrid, secondGrid, gameSpeed);
-  }, gameSpeed);
+  mainAnimation();
+  mainAnimationTimerId = setInterval(mainAnimation, gameSpeed);
 }
 
-function mainAnimation(firstGrid, secondGrid, gameSpeed) {
-  animateGrid(secondGrid, gameSpeed);
+function mainAnimation() {
+  animateGrid(secondGrid);
   setTimeout(function() {
-    animateGrid(firstGrid, gameSpeed);
+    animateGrid(firstGrid);
   }, gameSpeed / 2);
 }
 
 function changeMainColor() {
-  var color = helpers.getRandomElement(globals.colors);
-  mainColorLabel.style.backgroundColor = color;
-  mainColorLabel.clickColor = color;
+  console.log('CHANGED!');
+  mainColorLabel.style.backgroundColor = nextColor;
+  mainColorLabel.clickColor = nextColor;
+  do {
+    nextColor = helpers.getRandomElement(globals.colors);
+  } while(nextColor.localeCompare(mainColorLabel.clickColor) === 0);
+
+  mainColorLabel.style.color = nextColor;
 }
 
 function onTap(args) {
+  console.log(args.object.clickColor);
+  console.log(mainColorLabel.clickColor);
   if (args.object.clickColor.localeCompare(mainColorLabel.clickColor) !== 0) {
-    endGame(points);
+    args.object.style.backgroundColor = "Black";
+    //endGame(points);
     return;
   }
 
@@ -79,19 +83,17 @@ function onTap(args) {
   }
 }
 
-function onDoubleTap(args) {
-}
-
-function onLongPress(args) {
-}
-
 function recolorGrid(grid) {
   for (var i = 0, length = grid.getChildrenCount(); i < length; i += 1) {
-    grid.getChildAt(i).style.backgroundColor = helpers.getRandomElement(globals.colors);
+    var child = grid.getChildAt(i);
+    var color = helpers.getRandomElement(globals.colors);
+    child.style.backgroundColor = color;
+    child.clicked = false;
+    child.clickColor = color;
   }
 }
 
-function animateGrid(grid, duration) {
+function animateGrid(grid) {
   grid.animate({
     duration: 0,
     translate: {
@@ -101,7 +103,7 @@ function animateGrid(grid, duration) {
   })
   .then(function() {
       return grid.animate({
-      duration: duration,
+      duration: gameSpeed,
       translate: {
         x: 0,
         y: gridHeight
@@ -115,11 +117,13 @@ function animateGrid(grid, duration) {
 }
 
 function endGame(points) {
+  clearInterval(mainAnimationTimerId);
+  clearInterval(mainColorTimerId);
+
   var navigationEntry = {
     moduleName: "./views/end-screen-page",
     context: { points: points },
     animated: true,
-    backstackVisible: false
   };
 
   topmost.navigate(navigationEntry);
@@ -134,14 +138,12 @@ function populateGrid(grid, numberOfColumns, numberOfRows) {
   for (i = 0; i < numberOfRows; i++) {
     grid.addRow(new layout.ItemSpec(rowHeight, layout.GridUnitType.pixel));
     for (var j = 0; j < numberOfColumns; j++) {
-        var element = new buttonModule.Label();
+        var element = new labelModule.Label();
         var color = helpers.getRandomElement(globals.colors);
         element.style.backgroundColor = color;
         element.clickColor = color;
         element.clicked = false;
         element.on('tap', onTap);
-        element.on('doubleTap', onDoubleTap);
-        element.on('longPress', onLongPress);
         layout.GridLayout.setColumn(element, j);
         layout.GridLayout.setRow(element, i);
         grid.addChild(element);

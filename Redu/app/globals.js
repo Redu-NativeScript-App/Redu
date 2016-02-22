@@ -1,3 +1,3 @@
 exports.globals = {
-  colors: ["#f1c40f", "#f39c12", "#d35400", "#c0392b", "#27ae60", "#e74c3c", "#8e44ad", "#1abc9c", "#27ae60"]
+  colors: ["#1abc9c", "#2ecc71", "#9b59b6", "#c0392b", "#f39c12", "#2c3e50"]
 };

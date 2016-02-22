@@ -34,7 +34,7 @@ function onStartBtnTapped() {
   helpers.changeButtonStateIfPressed(startBtn);
 
   var navigationEntry = {
-    moduleName: "./views/game-page",
+    moduleName: "./views/choose-difficulty-page",
     backstackVisible: false
   };
 

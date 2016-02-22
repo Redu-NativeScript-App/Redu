@@ -1,8 +1,8 @@
-page{
+page {
   background-color: #FF5400;
 }
 
-button {
+.menuButton {
     font-size: 30;
     font-family: GretoonHighlight;
     color: white;
@@ -16,7 +16,7 @@ button {
 }
 
 .title {
-    font-size: 45;
+    font-size: 30;
     font-family: Gretoon;
     color: white;
     horizontal-align: center;
@@ -48,6 +48,10 @@ button {
   margin: 10px;
 }
 
+#list {
+  text-align: center;
+}
+
 .message {
     font-size: 20;
     color: #284848;
@@ -61,7 +65,7 @@ button {
   width: 230;
 }
 
-.score-title{
+.score-title {
   font-size: 45;
   font-family: Gretoon;
   color: white;

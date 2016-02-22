@@ -1,9 +1,9 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
   <StackLayout>
     <Label text="Main Menu" class="title"/>
-    <Button text="START" tap="onStartBtnTapped" id="startBtn" />
-    <Button text="LEADERBOARD" tap="onLeaderboardBtnTapped" id="leaderboardBtn"/>
-    <Button text="YOUR SCORES" tap="onLocalScoresBtnTapped" id="localScoresBtn"/>
-    <Button text="SETTINGS" tap="onSettingsBtnTapped" id="settingsBtn" />
+    <Button text="START" tap="onStartBtnTapped" id="startBtn" class="menuButton" />
+    <Button text="LEADERBOARD" tap="onLeaderboardBtnTapped" id="leaderboardBtn" class="menuButton" />
+    <Button text="YOUR SCORES" tap="onLocalScoresBtnTapped" id="localScoresBtn" class="menuButton" />
+    <Button text="SETTINGS" tap="onSettingsBtnTapped" id="settingsBtn" class="menuButton" />
   </StackLayout>
 </Page>

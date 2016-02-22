@@ -1,0 +1,8 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
+  <StackLayout>
+    <Label text="Choose wisely" class="title"/>
+    <Button text="Easy" tap="onEasyBtnTapped" id="easyBtn" class="menuButton" />
+    <Button text="Medium" tap="onMediumBtnTapped" id="mediumBtn" class="menuButton" />
+    <Button text="Hard" tap="onHardBtnTapped" id="hardBtn" class="menuButton" />
+  </StackLayout>
+</Page>
