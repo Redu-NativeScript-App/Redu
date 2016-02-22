@@ -25,7 +25,13 @@ function pageLoaded(args) {
 function onStartBtnTapped() {
   startBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(startBtn);
-  topmost.navigate("./views/game-page");
+
+  var navigationEntry = {
+    moduleName: "./views/game-page",
+    backstackVisible: false
+  };
+
+  topmost.navigate(navigationEntry);
 }
 
 function onLeaderboardBtnTapped() {
