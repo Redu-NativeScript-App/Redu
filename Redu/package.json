@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "nativescript-loading-indicator": "^1.0.1",
+    "nativescript-screen-orientation": "^1.0.2",
     "nativescript-sound": "^1.0.4",
+    "nativescript-toast": "^1.2.0",
     "tns-core-modules": "1.6.0"
   }
 }

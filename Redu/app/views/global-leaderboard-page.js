@@ -2,6 +2,8 @@ var frame = require('ui/frame');
 var vmModule = require("../view-models/global-leaderboard-view-model");
 var leaderboardService = require("../services/global-leaderboards-service");
 var loader = require("nativescript-loading-indicator");
+var orientationModule = require("nativescript-screen-orientation");
+
 var page;
 var list;
 var top10 = 10;
@@ -13,6 +15,7 @@ function pageLoaded(args) {
 }
 
 function getHighscores(){
+  orientationModule.setCurrentOrientation("portrait");
   loader.show();
   leaderboardService.getAllHighscores()
     .then(function(data){

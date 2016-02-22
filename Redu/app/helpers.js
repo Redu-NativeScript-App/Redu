@@ -1,3 +1,5 @@
+var Toast = require("nativescript-toast");
+
 exports.helpers = {
   getRandomElement: function(items) {
     return items[Math.floor(Math.random()*items.length)];
@@ -26,7 +28,8 @@ exports.helpers = {
   },
   validateNickname: function(nickname) {
     if (!nickname || name.length > 12) {
-      alert("Invalid name!");
+      var toast = Toast.makeText("Invalid Name!");
+      toast.show();
       return;
     }
   }

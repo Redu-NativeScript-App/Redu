@@ -8,6 +8,7 @@ var globals = require("../globals").globals;
 var helpers = require("../helpers").helpers;
 var animationModule = require("ui/animation");
 var platformModule = require("platform");
+var orientationModule = require("nativescript-screen-orientation");
 
 var screenWidth;
 var screenHeight;
@@ -23,6 +24,7 @@ var mainColorLabel;
 var points;
 
 function pageLoaded(args) {
+    orientationModule.setCurrentOrientation("portrait");
     var page = args.object;
     page.bindingContext = vmModule.gameViewModel;
     var firstGrid = page.getViewById("firstGrid");

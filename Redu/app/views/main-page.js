@@ -3,6 +3,9 @@ var view = require("ui/core/view");
 var frame = require("ui/frame");
 var services = require('../services/global-leaderboards-service');
 var helpers = require('../helpers').helpers;
+var orientationModule = require("nativescript-screen-orientation");
+
+var page;
 var topmost;
 var startBtn;
 var leaderboardBtn;
@@ -13,7 +16,8 @@ var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
 
 var localScoresService = require('../services/local-scores-service');
 function pageLoaded(args) {
-    var page = args.object;
+    orientationModule.setCurrentOrientation("portrait");
+    page = args.object;
     page.bindingContext = vmModule.mainViewModel;
     topmost = frame.topmost();
     startBtn = view.getViewById(page, "startBtn");
@@ -45,8 +49,8 @@ function onLocalScoresBtnTapped() {
 function onSettingsBtnTapped() {
   settingsBtn.style.backgroundImage = btnPressed;
   helpers.changeButtonStateIfPressed(settingsBtn);
-  // topmost.navigate("./views/settings-page");
-  topmost.navigate("./views/end-screen-page");
+  topmost.navigate("./views/settings-page");
+  //topmost.navigate("./views/end-screen-page");
 }
 
 exports.pageLoaded = pageLoaded;
