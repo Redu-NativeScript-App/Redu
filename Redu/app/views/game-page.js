@@ -83,7 +83,7 @@ function handleGesture(args, numberOfPoints) {
   if (!isCurrentlyInvulnerable && (args.object.clickColor.localeCompare(mainColorLabel.clickColor) !== 0)) {
     mistakesCount++;
     args.object.style.backgroundColor = "Black";
-    if (mistakesCount == 3) {
+    if (mistakesCount > 3) {
       endGame(points);
       return;
     }

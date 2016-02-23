@@ -1,12 +1,11 @@
-var frame = require('ui/frame');
-var vmModule = require("../view-models/global-leaderboard-view-model");
-var leaderboardService = require("../services/global-leaderboards-service");
-var loader = require("nativescript-loading-indicator");
-var orientationModule = require("nativescript-screen-orientation");
-
-var page;
-var list;
-var top10 = 10;
+var frame = require('ui/frame'),
+    vmModule = require("../view-models/global-leaderboard-view-model"),
+    leaderboardService = require("../services/global-leaderboards-service"),
+    loader = require("nativescript-loading-indicator"),
+    orientationModule = require("nativescript-screen-orientation"),
+    page,
+    list,
+    top10 = 10;
 
 function pageLoaded(args) {
   page = args.object;

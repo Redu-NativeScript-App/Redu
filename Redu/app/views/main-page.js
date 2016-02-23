@@ -1,20 +1,19 @@
-var vmModule = require("../view-models/main-view-model");
-var view = require("ui/core/view");
-var frame = require("ui/frame");
-var services = require('../services/global-leaderboards-service');
-var helpers = require('../helpers').helpers;
-var sounds = require('../sounds').sounds;
-var orientationModule = require("nativescript-screen-orientation");
-
-var page;
-var topmost;
-var tada;
-var startBtn;
-var leaderboardBtn;
-var aboutBtn;
-var localScoresBtn;
-var btnPressed = "url('~/images/green-rect-btn-pressed.png')";
-var btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
+var vmModule = require("../view-models/main-view-model"),
+    view = require("ui/core/view"),
+    frame = require("ui/frame"),
+    services = require('../services/global-leaderboards-service'),
+    helpers = require('../helpers').helpers,
+    sounds = require('../sounds').sounds,
+    orientationModule = require("nativescript-screen-orientation"),
+    page,
+    topmost,
+    tada,
+    startBtn,
+    leaderboardBtn,
+    aboutBtn,
+    localScoresBtn,
+    btnPressed = "url('~/images/green-rect-btn-pressed.png')",
+    btnUnpressed = "url('~/images/green-rect-btn-unpressed.png')";
 
 var localScoresService = require('../services/local-scores-service');
 function pageLoaded(args) {

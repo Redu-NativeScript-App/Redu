@@ -8,6 +8,7 @@ var vmModule = require("../view-models/end-screen-view-model"),
     imageModule = require("ui/image"),
     orientationModule = require("nativescript-screen-orientation"),
     notifier = require("../notification-manager"),
+    loader = require("nativescript-loading-indicator"),
     shareBtn,
     selfieBtn,
     page,
@@ -59,6 +60,7 @@ function onShareTapped() {
     console.log("Dialog result: " + res.result + ", text: " + res.text);
 
     return new Promise(function(resolve, reject) {
+      loader.show();
       resolve({
         score: playerScore,
         name: res.text,
@@ -71,9 +73,13 @@ function onShareTapped() {
       notifier.show("You must take a victory selfie");
       return;
     }
-
-    globalScoreService.addNewHighscore(highscore)
+    globalScoreService.addNewHighscore({
+      name: highscore.name,
+      score: +highscore.score,
+      selfie: highscore.selfie.substring(0,500)
+    })
     .then(function() {
+      loader.hide();
       topmost.goBack();
     });
   });

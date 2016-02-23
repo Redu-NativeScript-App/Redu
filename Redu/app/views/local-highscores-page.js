@@ -1,8 +1,7 @@
-var vmModule = require("../view-models/local-highscores-view-model");
-var localScoresService = require("../services/local-scores-service");
-var orientationModule = require("nativescript-screen-orientation");
-
-var page;
+var vmModule = require("../view-models/local-highscores-view-model"),
+    localScoresService = require("../services/local-scores-service"),
+    orientationModule = require("nativescript-screen-orientation"),
+    page;
 
 function pageLoaded(args) {
   orientationModule.setCurrentOrientation("portrait");

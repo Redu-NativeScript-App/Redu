@@ -1,10 +1,10 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
+  <AbsoluteLayout orientation="horizontal">
+    <Image src="~/images/ninjata.png" id="ninja" pan="onPan"/>
+  </AbsoluteLayout>
   <StackLayout>
     <Label text="About" class="title"/>
-    <StackLayout orientation="horizontal">
-      <Label text="By" class="about by"/>
-      <Image src="~/images/ninjata.png" id="ninjata"/>
-    </StackLayout>
+    <Label text="By" class="about"/>
     <Label text="Nikolay Karagyozov" class="about"/>
     <Label text="and" class="about"/>
     <Label text="Lyubomir Nanev" class="about"/>

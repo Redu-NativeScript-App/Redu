@@ -18,13 +18,14 @@ function getAllHighscores() {
 function addNewHighscore(highscore) {
   var url = baseUrl + '/api/highscores';
   return fetch(url, {
-    method: 'POST',
+    method: 'post',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(highscore)
   })
   .then(function(response) {
+    console.log(response);
     return new Promise(function(resolve, reject) {
       resolve(response.json());
     });
