@@ -1,6 +1,11 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
   <StackLayout>
     <Label text="About" class="title"/>
-
+    <Label text="By" class="about"/>
+    <Label text="Nikolay Karagyozov" class="about"/>
+    <Label text="and" class="about"/>
+    <Label text="Lyubomir Nanev" class="about"/>
+    <Image src="~/images/telerik-academy.png"/>
+    <Label text="2016" class="about"/>
   </StackLayout>
 </Page>

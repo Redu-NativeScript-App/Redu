@@ -2,7 +2,7 @@ page {
   background-color: #FF5400;
 }
 
-.menuButton {
+button {
     font-size: 30;
     font-family: GretoonHighlight;
     color: white;
@@ -12,7 +12,6 @@ page {
     background-size: cover;
     width: 350;
     height: 100;
-
 }
 
 .title {
@@ -77,5 +76,12 @@ page {
   font-size: 80;
   font-family: GretoonHighlight;
   color: blue;
+  horizontal-align: center;
+}
+
+.about{
+  font-size: 30;
+  font-family: Gretoon;
+  color: yellow;
   horizontal-align: center;
 }

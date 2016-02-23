@@ -1,4 +1,4 @@
-var vmModule = require("../view-models/settings-view-model");
+var vmModule = require("../view-models/about-view-model");
 var orientationModule = require("nativescript-screen-orientation");
 
 function pageLoaded(args) {
