@@ -23,7 +23,8 @@ var vmModule = require("../view-models/game-view-model"),
     firstGrid,
     secondGrid,
     invulnerabilityTime = 2000,
-    isCurrentlyInvulnerable = false;
+    isCurrentlyInvulnerable = false,
+    mistakesCount = 0;
 
 function pageLoaded(args) {
   var page = args.object;
@@ -80,8 +81,12 @@ function onDoubleTap(args) {
 
 function handleGesture(args, numberOfPoints) {
   if (!isCurrentlyInvulnerable && (args.object.clickColor.localeCompare(mainColorLabel.clickColor) !== 0)) {
-    endGame(points);
-    return;
+    mistakesCount++;
+    args.object.style.backgroundColor = "Black";
+    if (mistakesCount == 3) {
+      endGame(points);
+      return;
+    }
   }
 
   if (!args.object.clicked) {
